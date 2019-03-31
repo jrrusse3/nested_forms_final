@@ -5,5 +5,19 @@
   <%= @shop_list.name %>
 </p>
 
+<h2>Items</h2>
+<table>
+  <tr>
+    <th>Item Name</th>
+    <th>Price</th>
+  </tr>
+<% @shop_list.items.each do |item| %>
+  <tr>
+    <td><%= item.name %></td>
+    <td><%= item.price %></td>
+  </tr>
+  <% end %>
+</table>
+
 <%= link_to 'Edit', edit_shop_list_path(@shop_list) %> |
 <%= link_to 'Back', shop_lists_path %>

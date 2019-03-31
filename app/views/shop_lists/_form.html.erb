@@ -1,22 +1,30 @@
-<%= form_with(model: shop_list, local: true) do |form| %>
-  <% if shop_list.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(shop_list.errors.count, "error") %> prohibited this shop_list from being saved:</h2>
+<%= simple_form_for(@shop_list) do |f| %>
+  <%= f.error_notification %>
 
-      <ul>
-      <% shop_list.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="form-inputs">
+    <%= f.input :name %>
   </div>
+  <h3>Items</h3>
 
-  <div class="actions">
-    <%= form.submit %>
+  <table class='table'>
+    <thead>
+    <tr>
+      <th></th>
+      <th>Item Name</th>
+      <th>Price</th>
+    </tr>
+    </thead>
+    <tbody class='items'>
+    <%= f.simple_fields_for :items do |builder| %>
+      <%= render 'item_fields', f: builder %>
+    <% end %>
+    </tbody>
+
+  </table>
+
+  <div class="form-actions">
+    <%= link_to_add_association 'Add Item', f, :items, data: { association_insertion_node: '.items', association_insertion_method: :append } %>
+    <br><br>
+    <%= f.button :submit %>
   </div>
 <% end %>

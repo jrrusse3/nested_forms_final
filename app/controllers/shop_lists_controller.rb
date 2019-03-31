@@ -15,10 +15,12 @@ class ShopListsController < ApplicationController
   # GET /shop_lists/new
   def new
     @shop_list = ShopList.new
+    @shop_list.items.build
   end
 
   # GET /shop_lists/1/edit
   def edit
+    @shop_list.items.build
   end
 
   # POST /shop_lists
